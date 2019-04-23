@@ -16,11 +16,12 @@ class App extends Component {
       <div className="App">
         <Header />
         <Route 
-          path="/folder/:folderId" 
+          path="/" 
           render={() => <SideBar folders={this.state.folders}/>} />
         <Route
-          path="/folder/:folderId" 
-          render={() => <NoteList notes={this.state.notes}/>
+          exact
+          path={["/", "/folder/:folderId"]}
+          render={({match, history, location}) => <NoteList match={match} notes={this.state.notes}/>
         }/>
           
       </div>
