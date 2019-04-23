@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './Header/Header';
 import SideBar from './SideBar/SideBar';
 import NoteList from './NoteList/NoteList';
+import NoteSideBar from './NoteSideBar/NoteSideBar';
 
 class App extends Component {
   state = {
@@ -15,9 +16,19 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Route 
-          path="/" 
-          render={() => <SideBar folders={this.state.folders}/>} />
+        <nav>
+          <Route 
+            exact
+            path={["/", "/folder/:folderId"]} 
+            render={() => <SideBar folders={this.state.folders}/>} 
+          />
+          <Route
+            path="/note/:noteId"
+            render={( {match, history, location} ) => <NoteSideBar note={this.state.notes[match.params.noteId]} />}
+          />
+        </nav>
+      
+
         <Route
           exact
           path={["/", "/folder/:folderId"]}
