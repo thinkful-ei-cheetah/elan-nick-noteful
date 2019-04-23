@@ -8,13 +8,15 @@ export default function Note(props) {
   }
   console.log(content);
   return (
-    <Link to={'/note/' + props.id}>
+    
       <li className="note" id={props.id} key={props.id}>
+      <Link to={'/note/' + props.id}>
         <h3>{props.name}</h3>
+      </Link>
         <p>{props.modified}</p>
         <button>Delete</button>
         {content}
       </li>
-    </Link>
+    
   )
 }
