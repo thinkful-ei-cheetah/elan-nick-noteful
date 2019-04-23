@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function SideBar(props) {
-  const folders = props.folders.map( (folder, i) => {
+  const folders = props.folders.map( (folder) => {
     return (
       <Link to={'/folder/' + folder.id} key={folder.id}>
         <li> 
-          Folder  { i+1 }
+          {folder.name}
         </li>
       </Link>
     )

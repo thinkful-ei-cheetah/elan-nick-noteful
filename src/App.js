@@ -8,15 +8,15 @@ import NoteSideBar from './NoteSideBar/NoteSideBar';
 
 class App extends Component {
   state = {
-    folderIndex: [],
     folders: [...this.props.store.folders],
     notes: [...this.props.store.notes]
   };
 
+  getFolderName = (noteId) => {
+    const folderId = this.state.notes.find(note => note.id === noteId).folderId;
+    return this.state.folders.find(folder => folder.id === folderId).name;
+  }
   render () {
-    // this.state.folderIndex = this.state.folderIndex.map( (_, i) => {
-
-    // })
 
     return (
       <div className="App">
@@ -29,15 +29,15 @@ class App extends Component {
           />
           <Route
             path="/note/:noteId"
-            render={( {match, history, location} ) => <NoteSideBar folderId={(this.state.notes.find( note => note.id === match.params.noteId)).folderId} />}
-          />
+            render={( {match} ) => <NoteSideBar 
+              folderName={this.getFolderName(match.params.noteId)}/>} />
         </nav>
       
 
         <Route
           exact
           path={["/", "/folder/:folderId", "/note/:noteId"]}
-          render={({match, history, location}) => <NoteList match={match} notes={this.state.notes}/>
+          render={({match}) => <NoteList match={match} notes={this.state.notes}/>
         }/>
           
       </div>
