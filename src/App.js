@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
 import './App.css';
-import Header from './Header';
-import SideBar from './SideBar';
+import Header from './Header/Header';
+import SideBar from './SideBar/SideBar';
+import NoteList from './NoteList/NoteList';
 
 class App extends Component {
   state = {
@@ -15,19 +15,14 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <main>
-          <Route path="/" render={() => <SideBar folders={this.state.folders} />} />
-          <section className="notes">
-            <ul>
-              <li>
-                <h3>Note 1</h3>
-                <p>Date modified</p>
-                <button>Delete</button>
-              </li>
-            </ul>
-            <button>Add note</button>
-          </section>
-        </main>
+        <Route 
+          path="/folder/:folderId" 
+          render={() => <SideBar folders={this.state.folders}/>} />
+        <Route
+          path="/folder/:folderId" 
+          render={() => <NoteList notes={this.state.notes}/>
+        }/>
+          
       </div>
     );
   }
